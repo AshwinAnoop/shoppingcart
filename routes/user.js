@@ -2,7 +2,9 @@ var express = require('express');
 const { response } = require('../app');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helper');
-const userHelpers = require('../helpers/user-helper')
+
+const userHelpers = require('../helpers/user-helper');
+const { route } = require('./admin');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -28,5 +30,17 @@ router.post('/signup',function(req,res){
   })
 
 })
+
+router.post('/login',(req,res)=>{
+  userHelpers.doLogin(req.body).then((response)=>{
+    if(response.status){
+      res.redirect('/')
+    }
+    else{
+      res.redirect('/login')
+    }
+  })
+})
+
 
 module.exports = router;
