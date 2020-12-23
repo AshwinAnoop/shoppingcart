@@ -4,6 +4,11 @@
             <div class="col-md-6 m-auto">
                 <h2 class="text-center mt-3 pb-3">Login</h2>
                 <div class="mb-3 ">
+                    {{#if loginErr}}
+                    <p class="text-danger">
+                       {{loginErr}}
+                    </p>
+                    {{/if}}
                     <form action="/login" method="POST">
                         <label class="form-label">Email ID</label>
                         <input type="text" class="form-control" name="Email" placeholder="Enter Email ID">

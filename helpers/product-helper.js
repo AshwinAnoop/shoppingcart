@@ -1,5 +1,7 @@
 var db=require('../config/connection')
 var collection=require('../config/collections')
+var ObjectID = require('mongodb').ObjectID
+const { response } = require('../app')
 
 
 module.exports={
@@ -17,5 +19,15 @@ module.exports={
             resolve(products)
         })
 
+    },
+    deleteProduct:(prodId)=>{
+        console.log(prodId)
+        console.log(ObjectID(prodId))
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.PRODUCT_COLLECTION).removeOne({_id:ObjectID(prodId)}).then((response)=>{
+                console.log(response)
+                resolve(response)
+            })
+        })
     }
 }
